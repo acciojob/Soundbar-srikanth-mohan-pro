@@ -7,21 +7,26 @@ buttons.forEach((button)=>{
 	button.addEventListener("click",function(){
 		if(currentAudio){
 			currentAudio.pause();
-			currentAudio.currentTime=0;
+			currentAudio.remove();
 		}
 
-		const SoundName=button.innerText;
+		const SoundName=button.textContent.trim();
+		
+		const audio=document.createElement("audio");
+		audio.src="sounds/"+SoundName+".mp3";
+		audio.autoplay=true;
 
-			currentAudio=new Audio("sounds/"+SoundName+".mp3");
+		document.body.appendChild(audio);
 
-		currentAudio.play();
+		currentAudio=audio;
 	});
 });
 
 stop.addEventListener("click",function(){
 	if(currentAudio){
 		currentAudio.pause();
-		currentAudio.currentTime=0;
+		currentAudio.remove();
+		currentAudio=null;
 	}
 });
 
